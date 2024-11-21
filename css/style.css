@@ -12,15 +12,24 @@ body{
     margin: 0;
     padding: 0;
 }
-
-/* GLOBAL START------------------------------------------------------ */
-
-/* HEADER START------------------------------------------------------ */
-
 a {
     text-decoration: none;
     color: inherit;
 }
+input{
+    padding: 10px 12px;
+    display: block;
+    width: 100%;
+    border: 3px solid rgba(216, 224, 232, 0.72);
+    border-radius: 10px;
+    line-height: 1.5rem;
+    color: #5c5b5b;
+}
+/* GLOBAL START------------------------------------------------------ */
+
+/* HEADER START------------------------------------------------------ */
+
+
 header{
     background: rgba(0, 132, 132, 0.93);
     height: 70px;
@@ -94,7 +103,7 @@ div img{
     margin-bottom: 2em;
 }
 .main-content .post{
-margin-bottom: 3em;
+margin-bottom: 30px;
 }
 .main-content .post_text{
     background: rgb(216, 224, 232);
@@ -117,12 +126,34 @@ text-decoration: underline;
     margin: 0px 14px 14px 14px ;
 }
 
+/* SIDEBAR START */
+.search{
+    margin-top: 98px;
+}
+.sidebar .section{
+    height: 200px;
+    background: rgb(216, 224, 232);
+    border-radius: 10px;
+    padding: 50px;
+    margin-bottom: 30px;
+}
+.sidebar .age{
+    background: rgb(216, 224, 232);
+    border-radius: 10px;
+    padding: 50px;
+    list-style: none;
+}
 
-
-
-
-
-
+.sidebar .age ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+.sidebar .age ul li:hover{
+    text-decoration: underline;
+    color: #5c5b5b;
+}
 
 
 
