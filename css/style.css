@@ -1,3 +1,5 @@
+/* GLOBAL START */
+
 *{    font-family: "Comfortaa", cursive;
     font-optical-sizing: auto;
 
@@ -10,13 +12,15 @@ body{
     margin: 0;
     padding: 0;
 }
-a{
+
+/* GLOBAL START------------------------------------------------------ */
+
+/* HEADER START------------------------------------------------------ */
+
+a {
     text-decoration: none;
     color: inherit;
 }
-
-/* HEADER */
-
 header{
     background: rgba(0, 132, 132, 0.93);
     height: 70px;
@@ -59,7 +63,6 @@ header ul li ul{
     border: 2px solid rgba(0, 132, 132, 0.93);
     border-radius: 5px;
     background-color: rgba(0, 132, 132, 0.93);
-
 }
 header ul li:hover ul{
     display: block;
@@ -70,11 +73,66 @@ header ul li ul li{
 }
 header ul li ul li a{
     color: #fff !important;
-
-
 }
 .carousel-inner, .carousel-item, .carousel-item img {
     width: 100%;
-    height: 300px;
+    height: 200px;
     object-fit: cover;
 }
+/* HEADER END--------------------------------------------- */
+
+/* MAIN START--------------------------------------------- */
+
+.main-content h2{
+    margin: 30px 0;
+}
+div img{
+    border-radius: 10px;
+}
+
+.main-content .post{
+    margin-bottom: 2em;
+}
+.main-content .post{
+margin-bottom: 3em;
+}
+.main-content .post_text{
+    background: rgb(216, 224, 232);
+    padding: 7px;
+    border-radius: 10px;
+}
+.main-content .post_text h3{
+    margin: 14px;
+}
+
+.main-content .post_text h3 a:hover{
+text-decoration: underline;
+    color: #5c5b5b;
+}
+
+.main-content .post_text i{
+    margin: 0px 14px 14px 14px ;
+}
+.main-content .post_text p{
+    margin: 0px 14px 14px 14px ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
