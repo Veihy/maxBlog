@@ -245,11 +245,45 @@ text-decoration: underline;
     left: 0px;
     /*padding-top: 2px;*/
 }
+/* SINGLE POST */
+.info{
+    margin: 20px 0px 20px 0px;
 
+}
+.single_post .info i{
+    display: inline-block;
+    margin-right: 20px;
+}
 
+/* REGISTRATION */
+.reg{
 
+    height: 400px;
+    width: 400px;
+    margin-top: 225px;
+    margin-bottom: 225px;
+}
 
+.form-check-label{
+    margin-top: 3px;
+}
+.form-check-input[type="checkbox"]:checked {
+    background-color: #5c5b5b;
+    border-color: #5c5b5b;
+}
+.regword{
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-
-
-
+.reg_form{
+    font-size: 1.2em;
+    transition: all .3s;
+    color: #5c5b5b;
+    text-decoration: none;
+    margin-left: 100px;
+}
+.reg_form:hover{
+    margin-left: 105px;
+    transition: all .3s;
+}

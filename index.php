@@ -1,3 +1,4 @@
+<?php include("path.php") ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,34 +20,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Max Blog</title>
 </head>
 <body>
 
 <!-- HEADER START -->
-<header class="container-fluid">
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <h1><a href="/">Max blog</a></h1>
-            </div>
-            <nav class="col-8">
-                <ul>
-                    <li><a href="#"><i class="fa-solid fa-house"></i>Главная</a></li>
-                    <li><a href="#"><i class="fa-solid fa-note-sticky"></i>Посты</a></li>
-                    <li><a href="#"><i class="fa-regular fa-image"></i>Галерея</a></li>
-                    <li><a href="#"><i class="fa-solid fa-user"></i>Кабинет</a>
-                        <ul>
-                            <li><a href="#" style="color: rgba(216, 224, 232, 0.72);">Админка</a></li>
-                            <li><a href="#" style="color: rgba(216, 224, 232, 0.72);">Выход</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</header>
+<?php include("app/include/header.php") ?>
 <!-- HEADER END -->
 
 <!-- Autoplaying carousel Bootstrap  START-->
@@ -54,15 +34,15 @@
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="images/1.png" class="d-block w-100" alt="Lego">
+                <img src="assets/images/1.png" class="d-block w-100" alt="Lego">
             </div>
 
             <div class="carousel-item">
-                <img src="images/311.png" class="d-block w-100" alt="Hot Wheels">
+                <img src="assets/images/311.png" class="d-block w-100" alt="Hot Wheels">
             </div>
 
             <div class="carousel-item">
-                <img src="images/5.png" class="d-block w-100" alt="Airplanes">
+                <img src="assets/images/5.png" class="d-block w-100" alt="Airplanes">
             </div>
 
         </div>
@@ -79,7 +59,7 @@
                 <h2>Последние события</h2>
                 <div class="post row">
                     <div class="img col-12 col-md-4">
-                        <img src="images/2.png" alt="something">
+                        <img src="assets/images/2.png" alt="something">
                     </div>
                     <div class="post_text col-12 col-md-8">
                         <h3>
@@ -92,7 +72,7 @@
                 </div>
                 <div class="post row">
                     <div class="img col-12 col-md-4">
-                        <img src="images/2.png" alt="something">
+                        <img src="assets/images/2.png" alt="something">
                     </div>
                     <div class="post_text col-12 col-md-8">
                         <h3>
@@ -105,7 +85,7 @@
                 </div>
                 <div class="post row">
                     <div class="img col-12 col-md-4">
-                        <img src="images/2.png" alt="something">
+                        <img src="assets/images/2.png" alt="something">
                     </div>
                     <div class="post_text col-12 col-md-8">
                         <h3>
@@ -118,7 +98,7 @@
                 </div>
                 <div class="post row">
                     <div class="img col-12 col-md-4">
-                        <img src="images/2.png" alt="something">
+                        <img src="assets/images/2.png" alt="something">
                     </div>
                     <div class="post_text col-12 col-md-8">
                         <h3>
@@ -162,63 +142,7 @@
 <!-- MAIN BLOCK END -->
 
 <!-- FOOTER START -->
-<div class="footer container-fluid">
-    <div class="footer-content container">
-        <div class="row">
-            <div class="footer-section about col-md-4 col-12">
-                <h3 class="logo-text">Max blog</h3>
-                <p>Сборник рассказов о похождении неугомонного малышка</p>
-
-                <div class="contact">
-<!--                    <span><i class="fas fa-phone"></i>&nbsp; 322-223</span>-->
-<!--                    <span><i class="fas fa-phone"></i>&nbsp; 223-322</span>-->
-                    <span><i class="fas fa-envelope"></i>&nbsp; info@maxblog.com</span>
-                </div>
-
-                <div class="socials">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-section links col-md-4 col-12">
-                <h3>Menu</h3>
-
-                <ul>
-                    <a href="#">
-                        <li>Главная</li></a>
-                    <a href="#">
-                        <li>Посты</li></a>
-                    <a href="#">
-                        <li>Галерея</li></a>
-                    <a href="#">
-                        <li>Кабинет</li></a>
-                </ul>
-            </div>
-
-            <div class="footer-section contact-form col-md-4 col-12">
-                <h3>Написать Максу</h3>
-
-                <form action="index.html" method="post">
-                    <input type="email" name="email" class="text-input contact-input" placeholder="Your email adrees...">
-                    <textarea rows="4" name="mrssage" class="text-input contact-input" placeholder="Yor message..."></textarea>
-                    <button type="submit" class="btn btn-big contact-btn">
-                        <i class="fas fa-envelope"></i>
-                        Отправить
-                    </button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; maxblog.com | Designed by Dmitry Ivanov
-        </div>
-    </div>
-</div>
-<script src="js/sidebarScrolling.js"></script>
-</body>
-</html>
+<?php include("app/include/footer.php") ?>
 
 
 
