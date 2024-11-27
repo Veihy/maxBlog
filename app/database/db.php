@@ -103,6 +103,7 @@ function insert($pdo, $table, $params) {
     $query = $pdo->prepare($sql);
     $query->execute($params);
     dbCheckError($query);
+//    return $pdo->lastInsertId();
 }
 
 //задаем параметры
@@ -178,4 +179,4 @@ function delete($pdo, $table, $id) {
 
 
 //используем функцию для удаления
-//delete($pdo, 'users', 41);
+//delete($pdo, 'users', 44);

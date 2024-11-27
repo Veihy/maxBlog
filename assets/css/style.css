@@ -287,3 +287,6 @@ text-decoration: underline;
     margin-left: 105px;
     transition: all .3s;
 }
+form input{
+    height: 50px;
+}
