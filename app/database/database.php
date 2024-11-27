@@ -1,101 +1,181 @@
 <?php
 
+require ('connect.php'); // подключаем файл с конфигом подключения к бд
+require('dbCheck.php'); // подключаем файл с функцией для получения списка таблиц
+require ('dbCheckError.php'); //подключаем файл с функцией, которая проверяет на ошибки вврда
+
 function tt($value){ // крассивый вывод массива
     echo "<pre>";
     print_r($value);
     echo "</pre>";
 }
 
-function dbCheckError($query){ // функция для проверки на ошибки
-    $errInfo = $query->errorInfo(); //создаем переменную для проверок на ошибки
-    if ($errInfo[0] !== PDO::ERR_NONE) { // если индекс переменной не равен "успеху"
-        throw new Exception($errInfo[2]); // исключение с описанием ошибки
-
-    }
-    return true;
-}
 
 
 
-require ('connect.php'); // подключаем файл с конфигом подключения к бд
 
-//функция для вывода таблицы
+// Функция для вывода всех записей из таблицы
 function selectAll($pdo, $table, $params = []) {
-    // Проверяем допустимость таблицы
-    $allowedTables = ['users', 'posts', 'comments'];
-    if (!in_array($table, $allowedTables)) {
+    global $tables;
+
+    if (!in_array($table, $tables)) {
         throw new Exception("Неверное имя таблицы");
     }
 
-    // базовый запрос
-    $sql = "SELECT * FROM $table";
+    foreach ($params as $key => &$value) {
+        $value = sanitizeInput($value);
+        if ($value === false) {
+            throw new Exception("Некорректное значение для параметра: $key");
+        }
+    }
 
-    // добавляем условия, если переданы параметры
+    $sql = "SELECT * FROM $table";
     if (!empty($params)) {
         $conditions = [];
         foreach ($params as $key => $value) {
-            $conditions[] = "$key = :$key"; // Именованные параметры
+            $conditions[] = "$key = :$key";
         }
         $sql .= " WHERE " . implode(" AND ", $conditions);
     }
 
-    // подготавливаем запрос
     $query = $pdo->prepare($sql);
-
-    // Выполняем запрос с параметрами
     $query->execute($params);
-
-    // проверяем ошибки
     dbCheckError($query);
-
-    // возвращаем данные
     return $query->fetchAll();
 }
 
-//$params = [
-//    'admin' =>  1,
-//    'username' => 'dima'
-//];
-
-//функция для вывода одной строки таблицы
+// Функция для вывода одной записи из таблицы
 function selectOne($pdo, $table, $params = []) {
-    // Проверяем допустимость таблицы
-    $allowedTables = ['users', 'posts', 'comments'];
-    if (!in_array($table, $allowedTables)) {
+    global $tables;
+
+    if (!in_array($table, $tables)) {
         throw new Exception("Неверное имя таблицы");
     }
 
-    // базовый запрос
-    $sql = "SELECT * FROM $table";
+    foreach ($params as $key => &$value) {
+        $value = sanitizeInput($value);
+        if ($value === false) {
+            throw new Exception("Некорректное значение для параметра: $key");
+        }
+    }
 
-    // добавляем условия, если переданы параметры
+    $sql = "SELECT * FROM $table";
     if (!empty($params)) {
         $conditions = [];
         foreach ($params as $key => $value) {
-            $conditions[] = "$key = :$key"; // Именованные параметры
+            $conditions[] = "$key = :$key";
         }
         $sql .= " WHERE " . implode(" AND ", $conditions);
     }
-//    $sql = $sql . " LIMIT 1";
 
-    // подготавливаем запрос
     $query = $pdo->prepare($sql);
-
-    // Выполняем запрос с параметрами
     $query->execute($params);
-
-    // проверяем ошибки
     dbCheckError($query);
 
-    // возвращаем данные
     return $query->fetch();
 }
 
+//задаем параметры, если нужно
 //$params = [
-//    'admin' =>  1,
-//    'username' => 'dima'
-//];
+//    'email' => 'kate22@maxblog.com',
+//    'admin' => '1'];
 
-//вывод на экран
+//выводим на экран
 //tt(selectAll($pdo, 'users', $params));
-//tt(selectOne($pdo, 'users', $params));
+
+
+// Функция для вставки данных в таблицу
+function insert($pdo, $table, $params) {
+    global $tables;
+
+    if (!in_array($table, $tables)) {
+        throw new Exception("Неверное имя таблицы");
+    }
+
+    foreach ($params as $key => &$value) {
+        $value = sanitizeInput($value);
+    }
+
+    $columns = implode(", ", array_keys($params));
+    $placeholders = ":" . implode(", :", array_keys($params));
+
+    $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+    $query = $pdo->prepare($sql);
+    $query->execute($params);
+    dbCheckError($query);
+}
+
+//задаем параметры
+//$arrData = [
+//    'admin' => '0',
+//    'username' => 'test1',
+//    'email' => 'test1@maxblog.com',
+//    'password' => '3211'
+//];
+////используем функцию записи
+//insert($pdo, 'users', $arrData);
+
+
+
+// Функция для обновления данных в таблице
+function update($pdo, $table, $id, $params) {
+    global $tables;
+
+    if (!in_array($table, $tables)) {
+        throw new Exception("Неверное имя таблицы");
+    }
+
+    if (!filter_var($id, FILTER_VALIDATE_INT)) {
+        throw new Exception("ID должен быть числом");
+    }
+
+    foreach ($params as $key => &$value) {
+        $value = sanitizeInput($value);
+    }
+
+    $setParts = [];
+    foreach ($params as $key => $value) {
+        $setParts[] = "$key = :$key";
+    }
+    $setString = implode(", ", $setParts);
+
+    $sql = "UPDATE $table SET $setString WHERE id = :id";
+    $params['id'] = $id;
+
+    $query = $pdo->prepare($sql);
+    $query->execute($params);
+    dbCheckError($query);
+}
+
+//задаем параметры
+//$params = [
+//    'username' => 'жижа новогодняя',
+//    'password' => 'знатная красивая',
+//    'email' => 'жижа@domain.com',
+//    'admin' => '0'
+//];
+//используем функцию для изменения записей
+//update($pdo, 'users', 34, $params);
+
+
+// Функция для удаления записи из таблицы
+function delete($pdo, $table, $id) {
+    global $tables;
+
+    if (!in_array($table, $tables)) {
+        throw new Exception("Неверное имя таблицы");
+    }
+
+    if (!filter_var($id, FILTER_VALIDATE_INT)) {
+        throw new Exception("ID должен быть числом");
+    }
+
+    $sql = "DELETE FROM $table WHERE id = :id";
+    $query = $pdo->prepare($sql);
+    $query->execute(['id' => $id]);
+    dbCheckError($query);
+}
+
+
+//используем функцию для удаления
+//delete($pdo, 'users', 41);
